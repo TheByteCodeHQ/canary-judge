@@ -64,8 +64,8 @@ def mann_whitney(a: Sequence[float], b: Sequence[float]) -> tuple[float, float]:
 
 def lag1_autocorrelation(values: Sequence[float]) -> float:
     n = len(values)
-    if n < 3:
-        return 0.0
+    if n < 3 or max(values) == min(values):
+        return 0.0                       # a constant series has no memory; float rounding in the mean must not invent some
     mean = sum(values) / n
     var = sum((v - mean) ** 2 for v in values)
     if var == 0:

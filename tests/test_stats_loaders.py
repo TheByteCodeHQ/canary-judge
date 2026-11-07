@@ -114,6 +114,14 @@ def test_autocorrelation_and_effective_samples():
     assert lag1_autocorrelation([5.0] * 10) == 0.0 and lag1_autocorrelation([1, 2]) == 0.0
 
 
+def test_a_constant_series_has_no_autocorrelation_whatever_the_float_rounding():
+    """Regression: the mean of [0.1] * 3 is not exactly 0.1, and the leftover rounding error used to look like strong memory
+    (so a flat 'error rate' of exactly 0.02 was judged 'worth 1.5 samples' on some Python versions)."""
+    for n in range(3, 80):
+        assert lag1_autocorrelation([0.1] * n) == 0.0
+        assert effective_samples([0.02] * n) == n
+
+
 # -- loaders -------------------------------------------------------------------------------------------
 
 def write(tmp_path, name, text):
