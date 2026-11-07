@@ -24,8 +24,7 @@ jobs:
       - name: Run pytest
         shell: bash
         run: |
-          pytest --tb=short > out.txt 2>&1 || { echo "::error::$(grep -E '^(E |FAILED|tests/)' out.txt | head -c 1800 | tr '
-' '|')"; exit 1; }
+          pytest --tb=short > out.txt 2>&1 || { echo "::error::$(grep -E '^(E |FAILED|tests/)' out.txt | head -c 1800 | paste -sd '|' -)"; exit 1; }
 
   examples:
     runs-on: ubuntu-latest
