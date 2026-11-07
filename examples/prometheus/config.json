@@ -1,0 +1,1 @@
+{"alpha": 0.05, "warmup_points": 10, "min_samples": 30, "metrics": {"latency_p95_ms": {"statistic": "median", "max_regression": 0.1, "slo_max": 300}, "error_rate": {"statistic": "mean", "mode": "absolute", "max_regression": 0.002}, "cpu_percent": {"statistic": "mean", "max_regression": 0.25, "gating": false}}}

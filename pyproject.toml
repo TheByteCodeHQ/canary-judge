@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "canary-judge"
+version = "0.1.0"
+description = "Decide whether a canary deploy is safe to promote: statistically sound comparison of canary vs baseline metrics with confidence intervals, SLO checks and a promote, extend or rollback verdict."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Sujyonta Kumar Giri" }]
+keywords = ["canary", "deployment", "devops", "sre", "release-engineering", "statistics", "slo", "progressive-delivery"]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.5"]
+
+[project.scripts]
+canary-judge = "canary_judge.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 160
+target-version = "py310"
+extend-exclude = ["examples"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E501"]
+"src/canary_judge/*.py" = ["E501"]
